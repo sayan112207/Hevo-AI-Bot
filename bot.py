@@ -88,6 +88,9 @@ def display_chat_interface():
                 .st-emotion-cache-uzeiqp a {
                     color: #FF7D42;
                 }
+                .st-emotion-cache-1rsyhoq a {
+                    color: #FF7D42;
+                }
                 </style>
                 """, unsafe_allow_html=True)
 
