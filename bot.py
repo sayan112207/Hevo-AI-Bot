@@ -77,7 +77,7 @@ def display_chat_interface():
                  }
                 .custom-button {
                     background-color: #FFFFFF;
-                    color: #FF7D42;
+                    color: #FF7D42 !important;
                     font-size: 14px;
                     font-family: 'Source Sans Pro', sans-serif;
                     font-weight: 600;
