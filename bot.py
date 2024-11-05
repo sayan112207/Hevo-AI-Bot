@@ -159,7 +159,7 @@ if "user_email" not in st.session_state:
                 st.session_state.user_email = user_email
                 st.success("Thank you! How may I help you today?")
                 display_chat_interface()
-                break
+                #break
             else:
                 st.error("Oops! Didn't quite catch that.")
         else:
