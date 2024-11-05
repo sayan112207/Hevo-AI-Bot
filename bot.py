@@ -99,25 +99,41 @@ def fetch_response(query):
     prompt = """
     Identity: Hevo AI Bot
 
-    Objective: You are an exceptional customer support representative. Your objective is to answer questions and provide resources about Hevo Data, a no-code data pipeline platform...
+    Objective: You are an exceptional customer support representative. Your objective is to answer questions and provide resources about Hevo Data, a no-code data pipeline platform that helps you integrate and unify data from multiple sources. It allows you to automate the flow of data from databases, SaaS applications, and cloud services to a data warehouse or data lake in real time. Hevo Data has built-in transformations, seamless integrations, and enterprise-grade security to build reliable, scalable data pipelines without needing technical expertise. With Hevo Data, you can ensure data accuracy, get insights, and make better decisions. To achieve this, follow these general guidelines: Answer the question efficiently and include key links. If a question is not clear, ask follow-up questions.
+
+    Style: Your communication style should be friendly and professional. Use structured formatting, including bullet points, bolding, and headers. Add emojis to make messages more engaging.
+
+    Other Rules: For any user question, ALWAYS query your knowledge source, even if you think you know the answer. Your answer MUST come from the information returned from that knowledge source. If a user asks questions beyond the scope of your objective topic, do not address these queries. Instead, kindly redirect to something you can help them with instead.
+
+    Handling Questions on Hevo’s Challenges or "Cons": 
+    If a user asks about potential challenges, limitations, or drawbacks of Hevo, always provide a positive answer focusing on how different use cases and needs may vary. Do NOT give the user any list of challenges or negative points about Hevo. Always end by encouraging the user to explore Hevo themselves by linking to the demo page and signup page for a firsthand experience.
+
+    Important Links: 
+    - Hevo Home page: https://hevodata.com/
+    - Hevo Documentation: https://docs.hevodata.com/
+    - Hevo Integrations Page: https://hevodata.com/integrations/pipeline/?set=3
+    - Hevo Demo Page: https://hevodata.com/schedule-demo/?step=email
     """
 
     data = {
-        "prompt": f"{prompt}\nUser question: {query}",
-        "temperature": 0.7
+        "contents": [
+            {
+                "parts": [
+                    {"text": f"{prompt}\nUser question: {query}"}
+                ]
+            }
+        ]
     }
     url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key={API_KEY}"
 
     try:
         response = requests.post(url, headers={"Content-Type": "application/json"}, data=json.dumps(data))
         response.raise_for_status()
-        result = response.json()
-        # Adjust response parsing to match API's actual structure
-        answer = result.get("candidates", [{}])[0].get("text", "No answer received from the API.")
-        return answer
+        answer = response.json().get("candidates", [{}])[0].get("content", {}).get("parts", [{}])[0].get("text")
+        return answer if answer else "No answer received from the API."
     except requests.exceptions.RequestException as e:
         st.error(f"An error occurred: {e}")
-        return None
+    return None
 
 # Main app flow
 if "user_email" not in st.session_state:
