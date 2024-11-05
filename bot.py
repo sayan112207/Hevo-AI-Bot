@@ -148,10 +148,9 @@ def fetch_response(query):
 if "user_email" not in st.session_state:
     st.header("Welcome to Hevo AI Support Bot!")
     st.subheader("Before Chatting, Please enter your work email:")
-    user_email = st.text_input("Work Email", placeholder="Enter your work email address")
 
     while True:
-        user_email = st.text_input("Work Email", placeholder="Enter your work email address")
+        user_email = st.text_input("Work Email", placeholder="Enter your work email address", key="unique_user_email")
 
         if st.button("Submit"):
             if is_valid_email(user_email):
@@ -162,7 +161,7 @@ if "user_email" not in st.session_state:
                     display_chat_interface()
                     break
                 else:
-                    st.error("An error occurred. Please try again.")
+                    st.error("Oops! Didn't quite catch that.")
             else:
                 st.error("Invalid email format. Please enter a valid work email.")
 else:
