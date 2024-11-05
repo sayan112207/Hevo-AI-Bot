@@ -68,7 +68,7 @@ def display_chat_interface():
                 <style>
                 .cta-button {
                     background-color: #FFFFFF;
-                    color: white;
+                    color: #FF7D42;  /* Set link font color */
                     font-size: 14px;
                     font-family: 'Source Sans Pro', sans-serif;
                     font-weight: 600;
@@ -86,13 +86,11 @@ def display_chat_interface():
                     color: white;
                 }
                 .st-emotion-cache-uzeiqp a {
-                    color: #FF7D42;
-                }
-                .st-emotion-cache-1rsyhoq a {
-                    color: #FF7D42;
+                    color: #FF7D42;  /* Set general link font color */
                 }
                 </style>
                 """, unsafe_allow_html=True)
+
 
 # API call function
 def fetch_response(query):
