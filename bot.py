@@ -10,6 +10,12 @@ load_dotenv()
 # Retrieve API key from environment variable
 API_KEY = os.getenv("API_KEY")
 
+# Function to validate the email format
+def is_valid_email(email):
+    # Regular expression for validating an email address
+    email_regex = r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'
+    return re.match(email_regex, email) is not None
+    
 # Function to send the email to the webhook
 def send_email_to_webhook(email):
     url = "https://hook.us2.make.com/95ntuxan4xu8w967q89kgfeljen93ih6"  # Webhook URL
@@ -144,14 +150,20 @@ if "user_email" not in st.session_state:
     st.subheader("Before Chatting, Please enter your work email:")
     user_email = st.text_input("Work Email", placeholder="Enter your work email address")
 
-    if st.button("Submit"):
-        if user_email:
-            email_success = send_email_to_webhook(user_email)
-            if email_success:
-                st.session_state.user_email = user_email
-                st.success("Thank you! How may I help you today?")
-                display_chat_interface()
+    while True:
+        user_email = st.text_input("Work Email", placeholder="Enter your work email address")
+
+        if st.button("Submit"):
+            if is_valid_email(user_email):
+                email_success = send_email_to_webhook(user_email)
+                if email_success:
+                    st.session_state.user_email = user_email
+                    st.success("Thank you! How may I help you today?")
+                    display_chat_interface()
+                    break
+                else:
+                    st.error("An error occurred. Please try again.")
             else:
-                st.error("Please enter a valid email address.")
+                st.error("Invalid email format. Please enter a valid work email.")
 else:
     display_chat_interface()
