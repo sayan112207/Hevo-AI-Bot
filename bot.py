@@ -92,7 +92,7 @@ def display_chat_interface():
                 }
                 .custom-button:hover {
                     background-color: #FF7D42;
-                    color: white;
+                    color: white !important;
                 }
                 </style>
                 """, unsafe_allow_html=True)
