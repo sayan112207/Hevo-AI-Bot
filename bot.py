@@ -148,7 +148,8 @@ def fetch_response(query):
 if "user_email" not in st.session_state:
     st.header("Welcome to Hevo AI Support Bot!")
     st.subheader("Before Chatting, Please enter your work email:")
-
+    user_email = st.text_input("Work Email", placeholder="Enter your work email address", key="unique_user_email")
+    
     while True:
         # Use a unique key for the text_input
         user_email = st.text_input("Work Email", placeholder="Enter your work email address", key="unique_user_email_1")
