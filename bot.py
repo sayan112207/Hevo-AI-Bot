@@ -150,7 +150,7 @@ if "user_email" not in st.session_state:
     st.subheader("Before Chatting, Please enter your work email:")
 
     while True:
-        user_email = st.text_input("Work Email", placeholder="Enter your work email address", key="unique_user_email")
+        user_email = st.text_input("Work Email", placeholder="Enter your work email address")
 
         if st.button("Submit"):
             if is_valid_email(user_email):
