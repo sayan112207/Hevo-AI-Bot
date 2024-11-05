@@ -58,13 +58,16 @@ def display_chat_interface():
             st.chat_message("assistant", avatar="https://raw.githubusercontent.com/sayan112207/Hevo-AI-Bot/refs/heads/main/hevodata_logo.jpg?token=GHSAT0AAAAAACZVV3UPJWXGL3L33SL5ORFKZZJ4UEA").write(bot_response)
             st.session_state.chat_history.append({"role": "assistant", "content": bot_response, "avatar": "https://raw.githubusercontent.com/sayan112207/Hevo-AI-Bot/refs/heads/main/hevodata_logo.jpg?token=GHSAT0AAAAAACZVV3UPJWXGL3L33SL5ORFKZZJ4UEA"})
 
-            # Add styled buttons
-            st.markdown("""
-                <div class="button-container">
-                    <a class="custom-button" href="https://hevodata.com/signup/?step=email" target="_blank">Start for Free</a>
-                    <a class="custom-button" href="https://hevodata.com/schedule-demo/?step=email" target="_blank">Schedule a Demo</a>
-                </div>
-                """, unsafe_allow_html=True)
+            # # Add styled buttons
+            # st.markdown("""
+            #     <div class="button-container">
+            #         <a class="custom-button" href="https://hevodata.com/signup/?step=email" target="_blank">Start for Free</a>
+            #         <a class="custom-button" href="https://hevodata.com/schedule-demo/?step=email" target="_blank">Schedule a Demo</a>
+            #     </div>
+            #     """, unsafe_allow_html=True)
+
+            st.link_button("Start for Free", "https://hevodata.com/signup/?step=email")
+            st.link_button("Schedule a Demo", "https://hevodata.com/schedule-demo/?step=email")
 
             # CSS for buttons
             st.markdown("""
