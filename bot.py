@@ -75,7 +75,7 @@ def display_chat_interface():
                 # .button-container {
                 #     margin-top: 20px;
                 # }
-                .st-emotion-cache-1mcbg9u e16zdaao0 {
+                .st-emotion-cache-1mcbg9u {
                     background-color: #FFFFFF;
                     color: #FF7D42;
                     font-size: 14px;
@@ -90,7 +90,7 @@ def display_chat_interface():
                     transition: 0.3s;
                     display: inline-block;
                 }
-                .st-emotion-cache-1mcbg9u e16zdaao0:hover {
+                .st-emotion-cache-1mcbg9u:hover {
                     background-color: #FF7D42;
                     color: white;
                 }
