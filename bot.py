@@ -75,7 +75,7 @@ def display_chat_interface():
                 .button-container {
                     margin-top: 20px;
                 }
-                .custom-button {
+                .stLinkButton {
                     background-color: #FFFFFF;
                     color: #FF7D42;
                     font-size: 14px;
@@ -90,7 +90,7 @@ def display_chat_interface():
                     transition: 0.3s;
                     display: inline-block;
                 }
-                .custom-button:hover {
+                .stLinkButton:hover {
                     background-color: #FF7D42;
                     color: white;
                 }
