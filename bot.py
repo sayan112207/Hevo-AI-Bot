@@ -93,7 +93,7 @@ def display_chat_interface():
                     border-radius: 0.5rem;
                     border: 1px solid #FF7D42;
                     margin: 0 10px;
-                    text-decoration: none;
+                    text-decoration: none !important;
                     transition: 0.3s;
                     display: inline-block;
                 }
