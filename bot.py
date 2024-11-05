@@ -150,19 +150,19 @@ if "user_email" not in st.session_state:
     st.subheader("Before Chatting, Please enter your work email:")
     
     #while True:
-        user_email = st.text_input("Work Email", placeholder="Enter your work email address")
+    user_email = st.text_input("Work Email", placeholder="Enter your work email address")
 
-        if st.button("Submit"):
-            if is_valid_email(user_email):
-                email_success = send_email_to_webhook(user_email)
-                if email_success:
-                    st.session_state.user_email = user_email
-                    st.success("Thank you! How may I help you today?")
-                    display_chat_interface()
-                    break
-                else:
-                    st.error("Oops! Didn't quite catch that.")
+    if st.button("Submit"):
+        if is_valid_email(user_email):
+            email_success = send_email_to_webhook(user_email)
+            if email_success:
+                st.session_state.user_email = user_email
+                st.success("Thank you! How may I help you today?")
+                display_chat_interface()
+                break
             else:
-                st.error("Invalid email format. Please enter a valid work email.")
+                st.error("Oops! Didn't quite catch that.")
+        else:
+            st.error("Invalid email format. Please enter a valid work email.")
 else:
     display_chat_interface()
