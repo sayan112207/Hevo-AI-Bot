@@ -72,10 +72,10 @@ def display_chat_interface():
             # CSS for buttons
             st.markdown("""
                 <style>
-                .button-container {
-                    margin-top: 20px;
-                }
-                .stLinkButton {
+                # .button-container {
+                #     margin-top: 20px;
+                # }
+                .st-emotion-cache-1mcbg9u e16zdaao0 {
                     background-color: #FFFFFF;
                     color: #FF7D42;
                     font-size: 14px;
@@ -90,7 +90,7 @@ def display_chat_interface():
                     transition: 0.3s;
                     display: inline-block;
                 }
-                .stLinkButton:hover {
+                .st-emotion-cache-1mcbg9u e16zdaao0:hover {
                     background-color: #FF7D42;
                     color: white;
                 }
