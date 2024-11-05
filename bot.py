@@ -32,12 +32,12 @@ def display_chat_interface():
 
     # Initialize chat history if it doesn't exist
     if "chat_history" not in st.session_state:
-        st.session_state.chat_history = [{"role": "assistant", "content": "Hello! How can I help today?", "avatar": 'hevodata_logo.jpg'}]
+        st.session_state.chat_history = [{"role": "assistant", "content": "Hello! How can I help today?", "avatar": 'https://raw.githubusercontent.com/sayan112207/Hevo-AI-Bot/refs/heads/main/hevodata_logo.jpg?token=GHSAT0AAAAAACZVV3UPJWXGL3L33SL5ORFKZZJ4UEA'}]
 
     # Display chat messages from history
     for chat in st.session_state.chat_history:
         if chat["role"] == "assistant":
-            st.chat_message(chat["role"], avatar='hevodata_logo.jpg').write(chat["content"])
+            st.chat_message(chat["role"], avatar='https://raw.githubusercontent.com/sayan112207/Hevo-AI-Bot/refs/heads/main/hevodata_logo.jpg?token=GHSAT0AAAAAACZVV3UPJWXGL3L33SL5ORFKZZJ4UEA').write(chat["content"])
         else:
             st.chat_message(chat["role"]).write(chat["content"])
 
@@ -52,8 +52,8 @@ def display_chat_interface():
         # Fetch the response from the API
         bot_response = fetch_response(user_question)
         if bot_response:
-            st.chat_message("assistant", avatar='hevodata_logo.jpg').write(bot_response)
-            st.session_state.chat_history.append({"role": "assistant", "content": bot_response, "avatar": 'hevodata_logo.jpg'})
+            st.chat_message("assistant", avatar='https://raw.githubusercontent.com/sayan112207/Hevo-AI-Bot/refs/heads/main/hevodata_logo.jpg?token=GHSAT0AAAAAACZVV3UPJWXGL3L33SL5ORFKZZJ4UEA').write(bot_response)
+            st.session_state.chat_history.append({"role": "assistant", "content": bot_response, "avatar": 'https://raw.githubusercontent.com/sayan112207/Hevo-AI-Bot/refs/heads/main/hevodata_logo.jpg?token=GHSAT0AAAAAACZVV3UPJWXGL3L33SL5ORFKZZJ4UEA'})
 
             # Add styled buttons
             st.markdown("""
