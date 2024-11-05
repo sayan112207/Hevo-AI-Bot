@@ -32,12 +32,12 @@ def display_chat_interface():
 
     # Initialize chat history if it doesn't exist
     if "chat_history" not in st.session_state:
-        st.session_state.chat_history = [{"role": "assistant", "content": "Hello! How can I help today?", "avatar": 'https://raw.githubusercontent.com/sayan112207/Hevo-AI-Bot/refs/heads/main/hevodata_logo.jpg?token=GHSAT0AAAAAACZVV3UPGRIFOM6LR66QHQVUZZJYD2A'}]
+        st.session_state.chat_history = [{"role": "assistant", "content": "Hello! How can I help today?", "avatar": 'hevodata_logo.jpg'}]
 
     # Display chat messages from history
     for chat in st.session_state.chat_history:
         if chat["role"] == "assistant":
-            st.chat_message(chat["role"], avatar='https://raw.githubusercontent.com/sayan112207/Hevo-AI-Bot/refs/heads/main/hevodata_logo.jpg?token=GHSAT0AAAAAACZVV3UPGRIFOM6LR66QHQVUZZJYD2A').write(chat["content"])
+            st.chat_message(chat["role"], avatar='hevodata_logo.jpg').write(chat["content"])
         else:
             st.chat_message(chat["role"]).write(chat["content"])
 
@@ -52,21 +52,21 @@ def display_chat_interface():
         # Fetch the response from the API
         bot_response = fetch_response(user_question)
         if bot_response:
-            st.chat_message("assistant", avatar='https://raw.githubusercontent.com/sayan112207/Hevo-AI-Bot/refs/heads/main/hevodata_logo.jpg?token=GHSAT0AAAAAACZVV3UPGRIFOM6LR66QHQVUZZJYD2A').write(bot_response)
-            st.session_state.chat_history.append({"role": "assistant", "content": bot_response, "avatar": 'https://raw.githubusercontent.com/sayan112207/Hevo-AI-Bot/refs/heads/main/hevodata_logo.jpg?token=GHSAT0AAAAAACZVV3UPGRIFOM6LR66QHQVUZZJYD2A'})
+            st.chat_message("assistant", avatar='hevodata_logo.jpg').write(bot_response)
+            st.session_state.chat_history.append({"role": "assistant", "content": bot_response, "avatar": 'hevodata_logo.jpg'})
 
             # Add styled buttons
             st.markdown("""
                 <div>
-                    <a href="https://hevodata.com/signup/?step=email" target="_blank" class="cta-button">Start for Free</a>
-                    <a href="https://hevodata.com/schedule-demo/?step=email" target="_blank" class="cta-button">Schedule a Demo</a>
+                    <a href="https://hevodata.com/signup/?step=email" target="_blank">Start for Free</a>
+                    <a href="https://hevodata.com/schedule-demo/?step=email" target="_blank">Schedule a Demo</a>
                 </div>
                 """, unsafe_allow_html=True)
 
             # CSS for buttons
             st.markdown("""
                 <style>
-                .cta-button {
+                a:link, a:visited {
                     background-color: #FFFFFF;
                     color: #FF7D42;  /* Set link font color */
                     font-size: 14px;
@@ -80,14 +80,12 @@ def display_chat_interface():
                     text-decoration: none;
                     transition: 0.3s;
                 }
-                .cta-button:hover {
+                a:hover, a:active {
                     background-color: #FF7D42;
                     border: 1px solid #FF7D42;
                     color: white;
                 }
-                .st-emotion-cache-uzeiqp a {
-                    color: #FF7D42;  /* Set general link font color */
-                }
+                        
                 </style>
                 """, unsafe_allow_html=True)
 
