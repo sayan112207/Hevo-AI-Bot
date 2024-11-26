@@ -248,7 +248,7 @@ def fetch_response(query):
 # Main app flow
 if "user_email" not in st.session_state:
     st.header("Welcome to Hevo AI Support Bot!")
-    st.subheader("Before Chatting, Please enter your work email:")
+    st.subheader("Before moving forward, Please enter your work email:")
     
     user_email = st.text_input("Work Email", placeholder="Enter your work email address")
 
