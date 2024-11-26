@@ -19,7 +19,7 @@ def is_valid_email(email):
     
 # Function to send the email to the webhook
 def send_email_to_webhook(email):
-    url = "https://hook.us2.make.com/95ntuxan4xu8w967q89kgfeljen93ih6"  # Webhook URL
+    url = os.getenv("url") #Webhook URL
     data = {"Email": email}  # Payload for the webhook
     headers = {"Content-Type": "application/json"}
 
