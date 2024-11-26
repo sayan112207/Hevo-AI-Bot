@@ -4,6 +4,7 @@ import json
 import os
 from dotenv import load_dotenv
 import re
+import time
 
 # Load environment variables from .env file
 load_dotenv()
@@ -13,7 +14,6 @@ API_KEY = os.getenv("API_KEY")
 
 # Function to validate the email format
 def is_valid_email(email):
-    # Regular expression for validating an email address
     email_regex = r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'
     return re.match(email_regex, email) is not None
     
@@ -30,6 +30,55 @@ def send_email_to_webhook(email):
     except requests.exceptions.RequestException:
         st.error("Oops! Didn't quite catch that. Please try entering your email again.")
         return False
+
+# Function to display the typing animation
+def show_typing_animation():
+    st.markdown("""
+        <style>
+            .typing {
+                position: relative;
+                display: inline-block;
+            }
+
+            .typing span {
+                content: '';
+                animation: blink 1.5s infinite;
+                animation-fill-mode: both;
+                height: 10px;
+                width: 10px;
+                background: #3b5998;
+                position: absolute;
+                border-radius: 50%;
+            }
+
+            .typing span:nth-child(2) {
+                animation-delay: 0.2s;
+                margin-left: 15px;
+            }
+
+            .typing span:nth-child(3) {
+                animation-delay: 0.4s;
+                margin-left: 30px;
+            }
+
+            @keyframes blink {
+                0% {
+                    opacity: 0.1;
+                }
+                20% {
+                    opacity: 1;
+                }
+                100% {
+                    opacity: 0.1;
+                }
+            }
+        </style>
+        <div class="typing">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    """, unsafe_allow_html=True)
 
 # Main chat interface function
 def display_chat_interface():
@@ -59,22 +108,72 @@ def display_chat_interface():
         st.chat_message("user").write(user_question)
         st.session_state.chat_history.append({"role": "user", "content": user_question})
 
-        # Fetch the response from the API
+        # Show typing animation
+        typing_placeholder = st.empty()  # Placeholder to hold the typing animation
+        typing_placeholder.markdown("""
+            <style>
+                .typing {
+                    position: relative;
+                    display: inline-block;
+                }
+
+                .typing span {
+                    content: '';
+                    animation: blink 1.5s infinite;
+                    animation-fill-mode: both;
+                    height: 0.5rem;
+                    width: 0.5rem;
+                    background: #FF7D42;
+                    position: absolute;
+                    border-radius: 50%;
+                }
+
+                .typing span:nth-child(2) {
+                    animation-delay: 0.2s;
+                    margin-left: 15px;
+                }
+
+                .typing span:nth-child(3) {
+                    animation-delay: 0.4s;
+                    margin-left: 30px;
+                }
+
+                @keyframes blink {
+                    0% {
+                        opacity: 0.1;
+                    }
+                    20% {
+                        opacity: 1;
+                    }
+                    100% {
+                        opacity: 0.1;
+                    }
+                }
+            </style>
+            <div class="typing">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        """, unsafe_allow_html=True)
+
+        # Fetch the response from the API after a short delay to simulate typing
+        time.sleep(2)  # Simulating a typing delay of 2 seconds
+
+        # Fetch the bot's response
         bot_response = fetch_response(user_question)
         if bot_response:
+            typing_placeholder.empty()  # Clear the typing animation
             st.chat_message("assistant", avatar="https://res.cloudinary.com/hevo/image/upload/v1685872557/hevo-learn-1/Hevo-Brand-Logo.png").write(bot_response)
             st.session_state.chat_history.append({"role": "assistant", "content": bot_response, "avatar": "https://res.cloudinary.com/hevo/image/upload/v1685872557/hevo-learn-1/Hevo-Brand-Logo.png"})
 
-            # # Add styled buttons
+            # Add styled buttons
             st.markdown("""
                  <div class="button-container">
                      <a class="custom-button" href="https://hevodata.com/signup/?step=email" target="_blank">Start for Free</a>
                      <a class="custom-button" href="https://hevodata.com/schedule-demo/?step=email" target="_blank">Schedule a Demo</a>
                  </div>
                  """, unsafe_allow_html=True)
-
-            # st.link_button("Start for Free", "https://hevodata.com/signup/?step=email")
-            # st.link_button("Schedule a Demo", "https://hevodata.com/schedule-demo/?step=email")
 
             # CSS for buttons
             st.markdown("""
@@ -96,6 +195,7 @@ def display_chat_interface():
                     text-decoration: none !important;
                     transition: 0.3s;
                     display: inline-block;
+                    margin-bottom: 5%
                 }
                 .custom-button:hover {
                     background-color: #FF7D42;
@@ -150,7 +250,6 @@ if "user_email" not in st.session_state:
     st.header("Welcome to Hevo AI Support Bot!")
     st.subheader("Before Chatting, Please enter your work email:")
     
-    #while True:
     user_email = st.text_input("Work Email", placeholder="Enter your work email address")
 
     if st.button("Submit"):
@@ -160,9 +259,6 @@ if "user_email" not in st.session_state:
                 st.session_state.user_email = user_email
                 st.success("Thank you! How may I help you today?")
                 display_chat_interface()
-                #break
-            else:
-                st.error("Oops! Didn't quite catch that.")
         else:
             st.error("Invalid email format. Please enter a valid work email.")
 else:
