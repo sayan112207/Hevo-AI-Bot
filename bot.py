@@ -6,6 +6,11 @@ from dotenv import load_dotenv
 import re
 import time
 
+st.set_page_config(
+        page_title="Hevo AI Support Bot",
+        page_icon="https://github.com/sayan112207/Snowflake_Pricing_Calculator/blob/master/hevo_logo.png?raw=true"
+    )
+
 # Load environment variables from .env file
 load_dotenv()
 
@@ -13,23 +18,23 @@ load_dotenv()
 API_KEY = os.getenv("API_KEY")
 
 # Function to validate the email format
-def is_valid_email(email):
-    email_regex = r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'
-    return re.match(email_regex, email) is not None
+#def is_valid_email(email):
+#    email_regex = r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'
+#    return re.match(email_regex, email) is not None
     
 # Function to send the email to the webhook
-def send_email_to_webhook(email):
-    url = os.getenv("url") #Webhook URL
-    data = {"Email": email}  # Payload for the webhook
-    headers = {"Content-Type": "application/json"}
+#def send_email_to_webhook(email):
+#    url = os.getenv("url") #Webhook URL
+#    data = {"Email": email}  # Payload for the webhook
+#    headers = {"Content-Type": "application/json"}
 
-    try:
-        response = requests.post(url, headers=headers, json=data)
-        response.raise_for_status()
-        return True
-    except requests.exceptions.RequestException:
-        st.error("Oops! Didn't quite catch that. Please try entering your email again.")
-        return False
+#    try:
+#        response = requests.post(url, headers=headers, json=data)
+#        response.raise_for_status()
+#        return True
+#    except requests.exceptions.RequestException:
+#        st.error("Oops! Didn't quite catch that. Please try entering your email again.")
+#        return False
 
 # Function to display the typing animation
 def show_typing_animation():
@@ -82,7 +87,7 @@ def show_typing_animation():
 
 # Main chat interface function
 def display_chat_interface():
-    st.title("Hevo AI Support Bot")
+#    st.title("Hevo AI Support Bot")
     st.markdown("Welcome to the **Hevo Data Support Bot**! 🌐 Ask questions about Hevo’s features, integrations, or setup.")
 
     # Initialize chat history if it doesn't exist
@@ -246,20 +251,20 @@ def fetch_response(query):
     return None
 
 # Main app flow
-if "user_email" not in st.session_state:
-    st.header("Welcome to Hevo AI Support Bot!")
-    st.subheader("Before moving forward, Please enter your work email:")
+#if "user_email" not in st.session_state:
+st.header("Welcome to Hevo AI Support Bot!")
+#st.subheader("Before moving forward, Please enter your work email:")
     
-    user_email = st.text_input("Work Email", placeholder="Enter your work email address")
+#user_email = st.text_input("Work Email", placeholder="Enter your work email address")
 
-    if st.button("Submit"):
-        if is_valid_email(user_email):
-            email_success = send_email_to_webhook(user_email)
-            if email_success:
-                st.session_state.user_email = user_email
-                st.success("Thank you! How may I help you today?")
-                display_chat_interface()
-        else:
-            st.error("Invalid email format. Please enter a valid work email.")
-else:
-    display_chat_interface()
+#    if st.button("Submit"):
+#        if is_valid_email(user_email):
+#            email_success = send_email_to_webhook(user_email)
+#            if email_success:
+#                st.session_state.user_email = user_email
+#                st.success("Thank you! How may I help you today?")
+display_chat_interface()
+#        else:
+#            st.error("Invalid email format. Please enter a valid work email.")
+#else:
+#    display_chat_interface()
